@@ -1,0 +1,40 @@
+# - name: UPDATES
+#   hosts: all
+#   become: yes
+#   become_method: sudo
+#   tasks:
+#     - name: Updates
+#       command: sudo yum update -y
+#       ignore_errors: true
+
+ - name: INSTALL REQUIREMENTS
+   hosts: all
+   become: yes
+   become_method: sudo
+   roles:
+     - requirements
+
+ - name: INSTALL DOCKER
+   hosts: all
+   become: yes
+   become_method: sudo
+   roles:
+     - docker-install
+
+ - name: DOCKER RUN
+   hosts: all
+   become: yes
+   become_method: sudo
+   become_user: ec2-user
+   roles:
+     - docker-run
+
+  - name: MANAGER INIT SWARM
+    hosts: manager
+    roles:
+      - swarm-init
+
+  - name: WORKER JOIN SWARM
+    hosts: workers
+    roles:
+      - swarm-add-worker

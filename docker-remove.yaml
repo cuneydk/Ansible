@@ -1,0 +1,7 @@
+ - name: DOCKER VE PAKETLERINI KALDIR
+   hosts: all
+   become: true
+ # become_user: ec2-user
+   become_method: sudo
+   roles:
+     - docker-remove

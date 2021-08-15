@@ -1,0 +1,6 @@
+---
+  - name: LEAVE DOCKER SWARM CLUSTER
+    command: docker swarm leave --force
+
+  - name: DOCKER SYSTEM PRUNE
+    command: docker system prune --all --volumes --force

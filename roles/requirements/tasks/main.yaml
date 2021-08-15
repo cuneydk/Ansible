@@ -1,0 +1,42 @@
+---
+#  vars:
+#    packages: ['git', 'curl']
+#  - name: PAKET KURULUMLARI (git,curl,...)
+#    yum: name={{ item }} state=latest
+#    with_items: "{{ packages }}"
+
+  - name: INSTALL CURL
+    yum:
+      name: curl
+      state: present
+
+  - name: INSTALL GIT
+    yum:
+      name: git
+      state: present
+      update_cache: yes
+
+  - name: DOWNLOAD GOLANG 1.16.5
+    get_url:
+      url: https://golang.org/dl/go1.16.5.linux-amd64.tar.gz
+      dest: /tmp/go1.16.5.linux-amd64.tar.gz
+
+  - name: EXTRACT GO
+    command: tar xvf /tmp/go1.16.5.linux-amd64.tar.gz -C /usr/local
+
+  - name: UPDATE PROFILE (GO)
+    copy: content="export GO_HOME=/usr/local/go \n" dest=/etc/profile.d/go.sh
+  - lineinfile:
+      path: /etc/profile.d/go.sh
+      line: 'export PATH=${GO_HOME}/bin:${PATH}'
+
+  - name: SOURCE PROFILE (GO)
+    shell: source /etc/profile.d/go.sh
+
+  - name: NODEJS 10.X
+    shell: "curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -"
+
+  - name: INSTALL NODEJS
+    yum:
+      name: nodejs
+      state: present

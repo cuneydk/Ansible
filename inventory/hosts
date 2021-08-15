@@ -1,0 +1,12 @@
+[all:vars]
+host_key_checking=False
+ansible_ssh_private_key_file=./inventory/.....
+ansible_user=......
+
+[all]
+
+
+[manager]
+
+
+[workers]
