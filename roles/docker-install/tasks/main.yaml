@@ -55,4 +55,16 @@
         packages:
         - boto
         - boto3
-        - docker-compose
+
+    - name: DOCKER COMPOSE
+      shell: "curl -L https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose"
+      
+    - name: CHMOD +X DOCKER-COMPOSE
+      shell: "chmod +x /usr/local/bin/docker-compose"
+
+    - name: SYMBOLIC LINK (usr/bin/docker-compose)
+      shell: "ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose"
+
+    - name: UPDATES
+      shell: "yum update -y"
+
