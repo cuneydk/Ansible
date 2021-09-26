@@ -1,6 +1,5 @@
 # Installing Ansible
 -------------------------------
-Ansible'ı Ubuntu'ya Kurmak
 Ubuntu yapıları burada bir PPA'da mevcuttur. PPA'yı makinenizde yapılandırmak ve Ansible'ı kurmak için şu komutları çalıştırın:
 
     sudo apt update
