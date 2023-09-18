@@ -35,5 +35,5 @@ RHEL 7 için Ansible Engine deposunu etkinleştirmek için aşağıdaki komutu �
 
 https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 
-#For Infrastructure Model:
+# For Infrastructure Model:
 Infrastructure.pdf
