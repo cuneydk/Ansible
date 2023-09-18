@@ -34,3 +34,6 @@ RHEL 7 için Ansible Engine deposunu etkinleştirmek için aşağıdaki komutu �
     sudo subscription-manager repos --enable rhel-7-server-ansible-2.9-rpms
 
 https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
+
+#For Infrastructure Model:
+Infrastructure.pdf
