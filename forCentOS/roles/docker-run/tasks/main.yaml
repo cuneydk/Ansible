@@ -1,0 +1,19 @@
+---
+    - name: DOCKER START
+      shell: "service docker start"
+      ignore_errors: true
+
+    - name: DOCKER GROUP ADD
+      command: sudo groupadd docker
+      ignore_errors: true
+
+    - name: DOCKER USERMOD
+      command: sudo usermod -aG docker ${USER}
+      ignore_errors: true
+
+    - name: HELLO WORLD
+      command: docker run hello-world
+      ignore_errors: true
+
+
+

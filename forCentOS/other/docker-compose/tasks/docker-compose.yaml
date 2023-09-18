@@ -1,0 +1,16 @@
+- name: INSTALL DOCKER COMPOSE
+  hosts: all
+  become: true
+  become_method: sudo
+  become_user: root
+  gather_facts: no
+  vars:
+    unames: Linux
+    unamem: x86_64
+    version: 1.29.1
+  tasks:
+    - name: DOCKER-COMPOSE KURULUMU (1.29.1)
+      get_url:
+        url: https://github.com/docker/compose/releases/download/{{ version }}/docker-compose-{{ unames }}-{{ unamem }}
+        dest: /usr/local/bin/docker-compose
+        mode: 755

@@ -1,0 +1,15 @@
+---
+  - name: REMOVE DOCKER AND ALL COMPONENTS
+    yum:
+      name:
+        - docker
+        - docker-client
+        - docker-client-latest
+        - docker-common
+        - docker-latest
+        - docker-latest-logrotate
+        - docker-logrotate
+        - docker-engine
+        - docker-ce-cli
+        - docker-ce
+      state: removed

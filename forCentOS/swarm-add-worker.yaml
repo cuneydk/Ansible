@@ -1,0 +1,4 @@
+- name: ADD WORKER
+  hosts: workers
+  roles:
+    - swarm-add-worker

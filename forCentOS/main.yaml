@@ -1,0 +1,39 @@
+  - name: INSTALL REQUIREMENTS
+    hosts: all
+    become: yes
+    become_method: sudo
+    roles:
+      - requirements
+
+  - name: INSTALL DOCKER
+    hosts: all
+    become: yes
+    become_method: sudo
+    roles:
+      - docker-install
+
+  - name: DOCKER RUN
+    hosts: all
+    become: 
+    become_method: sudo
+    become_user: ec2-user
+    roles:
+      - docker-run
+
+#  - name: MANAGER INIT SWARM
+#    hosts: manager
+#    roles:
+#      - swarm-init
+
+#  - name: WORKER JOIN SWARM
+#    hosts: workers
+#    roles:
+#      - swarm-add-worker
+
+#  - name: CREATE A DOCKER NETWORK
+#    hosts: manager
+#    remote_user: root
+#    gather_facts: False
+#    tasks:
+#      - name: Create a Network
+#        command: docker network create -d overlay --attachable test

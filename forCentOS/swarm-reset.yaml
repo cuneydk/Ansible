@@ -1,0 +1,5 @@
+ - name: SWARM RESET
+   hosts: all
+   gather_facts: False
+   roles:
+     - swarm-reset

@@ -1,0 +1,29 @@
+---
+  - hosts: all
+    become: true
+    become_method: sudo
+    become_user: ec2-user
+    tasks:
+      - name: INIT SWARM
+        community.docker.docker_swarm:
+          state: present
+          advertise_addr: "{{ ansible_host }}"
+        register: result
+        when: inventory_hostname == groups['manager'][0]
+
+      - name: JOIN TOKEN MANAGER
+        set_fact:
+          join_token_manager: "{{ hostvars[groups['manager'][0]].result.swarm_facts.JoinTokens.Manager }}"
+
+      - name: JOIN TOKEN WORKER
+        set_fact:
+          join_token_worker: "{{ hostvars[groups['manager'][0]].result.swarm_facts.JoinTokens.Worker }}"
+
+      - name: JOIN SWARM
+        community.docker.docker_swarm:
+          state: join
+          advertise_addr: "{{ ansible_host }}"
+          join_token: "{{ join_token_worker }}"
+          remote_addrs: "{{ hostvars[groups['manager'][0]].ansible_host }}"
+        when:
+          - inventory_hostname in groups['workers']

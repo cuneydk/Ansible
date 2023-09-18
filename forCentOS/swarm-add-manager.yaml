@@ -1,0 +1,4 @@
+- name: ADD MANAGER
+  hosts: manager
+  roles:
+    - swarm-add-manager

@@ -1,0 +1,54 @@
+---
+    - name: INSTALL EPEL-RELEASE
+      shell: "yum install epel-release -y"
+ 
+    - name: PAKET KURULUMLARI
+      yum:
+        name: "{{ packages }}"
+        state: latest
+        update_cache: yes
+      vars:
+        packages:
+        - python-pip
+        - yum-utils
+        - lvm2
+        - ntp
+        - tcpdump
+        - wget
+        - openssl
+
+    - name: PAKET KURULUMLARI (Python, Ansible, Docker)
+      yum:
+        name: "{{ packages }}"
+        state: present
+        update_cache: yes
+      vars:
+        packages:
+        - docker
+
+    - name: DOCKER CE BASLAT
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+#    - name: PIP3 YUKSELTMESI
+#      shell: "python3.8 -m pip install pip --upgrade"
+
+#    - name: PIP PAKET KURULUMLARI
+#      pip:
+#        name: "{{ packages }}"
+#        executable: /usr/local/bin/pip3.8
+#      vars:
+#        packages:
+#        - boto
+#        - boto3
+
+    - name: DOCKER COMPOSE
+      shell: "curl -L https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose"
+      
+    - name: CHMOD +X DOCKER-COMPOSE
+      shell: "chmod +x /usr/local/bin/docker-compose"
+
+    - name: SYMBOLIC LINK (usr/bin/docker-compose)
+      shell: "ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose"
